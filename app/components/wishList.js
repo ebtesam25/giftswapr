@@ -15,7 +15,7 @@ const WishList = ({ itemList}) => (
         <FlatList
                 data={itemList}
                 renderItem={({ item }) => <WishItem
-                    name={item.name}
+                    name={item}
                     
                     
                 />}

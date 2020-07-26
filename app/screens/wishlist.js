@@ -23,22 +23,7 @@ export default class Wishlist extends React.Component  {
   
     componentDidMount() {
       this._loadFontsAsync();
-      fetch('https://us-central1-aiot-fit-xlab.cloudfunctions.net/gethackywishlist', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          "user" : "me"
-        })
-})
-    .then((response) => response.json())
-    .then((responseJson) => {
-console.log(responseJson.friends);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+      
 
     fetch('https://us-central1-aiot-fit-xlab.cloudfunctions.net/add2hackywishlist', {
       method: 'POST',
@@ -51,7 +36,7 @@ console.log(responseJson.friends);
 })
   .then((response) => response.json())
   .then((responseJson) => {
-console.log(responseJson.friends);
+console.log(responseJson);
   })
   .catch((error) => {
       console.error(error);
@@ -62,18 +47,22 @@ console.log(responseJson.friends);
     
 
     getData() {
-        return  [
-        {
-          
-        name:"Raspberry Pi4",
-        
-      },
-      {
-        
-        name:"Snap spectacles",
-        
-      },
-      ]
+      fetch('https://us-central1-aiot-fit-xlab.cloudfunctions.net/gethackywishlist', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "user" : "me"
+        })
+})
+    .then((response) => response.json())
+    .then((responseJson) => {
+console.log(responseJson.list);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
       }
      
   

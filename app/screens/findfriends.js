@@ -24,21 +24,25 @@ export default class FindFriends extends React.Component  {
     componentDidMount() {
       this._loadFontsAsync();
     }
-
     getData() {
-        return  [
-        {
-          
-        name:"Chandler Bing",
-        
-      },
-      {
-        
-        name:"Joey Tribbiani",
-        
-      },
-      ]
+      fetch('https://us-central1-aiot-fit-xlab.cloudfunctions.net/gethackyfriendlist', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "user" : "me"
+        })
+})
+    .then((response) => response.json())
+    .then((responseJson) => {
+console.log(responseJson.friends);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
       }
+     
      
   
     render(){
