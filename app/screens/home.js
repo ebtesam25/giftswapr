@@ -2,16 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
-import WishList from '../components/wishList';
-
-import { ScrollView } from 'react-native-gesture-handler';
 
 let customFonts  = {
     'Avenir': require('../assets/fonts/Avenir.ttf'),
     'Futura': require('../assets/fonts/Futura.ttf'),
   };
   
-export default class SendGift extends React.Component  {
+export default class Home extends React.Component  {
     state = {
       fontsLoaded: false,
     };
@@ -24,42 +21,22 @@ export default class SendGift extends React.Component  {
     componentDidMount() {
       this._loadFontsAsync();
     }
-
-    getData() {
-        return  [
-        {
-          
-        name:"Porsche",
-        
-      },
-      {
-        
-        name:"Guitar",
-        
-      },
-      ]
-      }
-     
   
     render(){
         if (this.state.fontsLoaded) {
         return (
         <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('#')}>Chandler's Wishlist</Text>
+        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('#')}>Welcome</Text>
         
         
-          <Text style={styles.welcome3}>Send Chandler a gift</Text>
+          <Text style={styles.welcome3}>Connect with your friends and give them the perfect birthday gifts on their special day. Create wishlists and have them fulfilled on yours!</Text>
          
-         
-
-      <ScrollView style={styles.scrollcontainer}>
-      <WishList itemList={this.getData()}/>
-     
-      
-      </ScrollView>
-    </View>
-        )}
-
+          <Image source={require('../assets/images/gifts.png')} style={styles.logo}></Image>
+          <Text style={styles.btn} onPress={() => this.props.navigation.navigate('Findfriends')}>Gift a friend</Text>
+          <Text style={styles.btn2} onPress={() => this.props.navigation.navigate('Wishlist')}>Create your wishlist</Text>
+        </View>
+        );
+        }
         else {
         return <AppLoading />;
         }
@@ -68,16 +45,10 @@ export default class SendGift extends React.Component  {
 
     const styles = StyleSheet.create({
         container: {
-            height:'100%',
-            position:'relative',
-            
-          },
-          scrollcontainer: {
-            height:'100%',
-            position:'relative',
-            top:'40%',
-            
-          },
+          height:'100%',
+          position:'relative',
+          backgroundColor: 'white',
+        },
         logo:{
           height:'80%',
           width:'80%',
@@ -92,8 +63,7 @@ export default class SendGift extends React.Component  {
             fontSize:30,
             position:'absolute',
             alignSelf:'center',
-            
-            zIndex:2,
+            zIndex:1,
             padding:'5%',
             backgroundColor:'#EA765D',
             width:'100%',
@@ -129,8 +99,7 @@ export default class SendGift extends React.Component  {
       fontSize:20,
       position:'relative',
       alignSelf:'center',
-      top:'-20%',
-      elevation:2,
+      top:'70%',
       color:'black',
       width:'75%',
       textAlign:'center',
@@ -140,23 +109,25 @@ export default class SendGift extends React.Component  {
       shadowColor:'#000',
       color:'#FFF',
       marginBottom:'5%',
-      elevation:4,
+      zIndex:4,
+      position:'absolute'
   },
   btn2: {
     fontFamily:'Avenir',
     fontSize:20,
-    position:'relative',
+    position:'absolute',
     alignSelf:'center',
-    top:'0%',
-    elevation:2,
+    top:'82%',
     color:'black',
     width:'75%',
     textAlign:'center',
-    backgroundColor:'#FFF',
+    backgroundColor:'#EA765D',
     padding:'5%',
     borderRadius:15,
     shadowColor:'#000',
-    elevation:4,
+    color:'#FFF',
+    marginBottom:'5%',
+    zIndex:4,
 },
         
       });

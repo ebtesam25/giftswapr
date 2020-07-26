@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native'
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import WishList from '../components/wishList';
-
+import AddWish from '../components/addWish';
 import { ScrollView } from 'react-native-gesture-handler';
 
 let customFonts  = {
@@ -11,7 +11,7 @@ let customFonts  = {
     'Futura': require('../assets/fonts/Futura.ttf'),
   };
   
-export default class SendGift extends React.Component  {
+export default class Wishlist extends React.Component  {
     state = {
       fontsLoaded: false,
     };
@@ -23,18 +23,54 @@ export default class SendGift extends React.Component  {
   
     componentDidMount() {
       this._loadFontsAsync();
+      fetch('https://us-central1-aiot-fit-xlab.cloudfunctions.net/gethackywishlist', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          "user" : "me"
+        })
+})
+    .then((response) => response.json())
+    .then((responseJson) => {
+console.log(responseJson.friends);
+    })
+    .catch((error) => {
+        console.error(error);
+    });
+
+    fetch('https://us-central1-aiot-fit-xlab.cloudfunctions.net/add2hackywishlist', {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "user" : "me", "name":"Porsche"
+      })
+})
+  .then((response) => response.json())
+  .then((responseJson) => {
+console.log(responseJson.friends);
+  })
+  .catch((error) => {
+      console.error(error);
+  });
     }
+
+
+    
 
     getData() {
         return  [
         {
           
-        name:"Porsche",
+        name:"Raspberry Pi4",
         
       },
       {
         
-        name:"Guitar",
+        name:"Snap spectacles",
         
       },
       ]
@@ -45,17 +81,17 @@ export default class SendGift extends React.Component  {
         if (this.state.fontsLoaded) {
         return (
         <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('#')}>Chandler's Wishlist</Text>
+        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('#')}>My Wishlist</Text>
         
         
-          <Text style={styles.welcome3}>Send Chandler a gift</Text>
+          <Text style={styles.welcome3}>What's on your wishlist?</Text>
          
          
 
       <ScrollView style={styles.scrollcontainer}>
       <WishList itemList={this.getData()}/>
-     
-      
+      <AddWish></AddWish>
+      <Image source={require('../assets/images/plus.png')} style={{alignSelf:'center', marginTop:'30%'}}></Image>
       </ScrollView>
     </View>
         )}

@@ -2,16 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
-import WishList from '../components/wishList';
 
 import { ScrollView } from 'react-native-gesture-handler';
+import FriendList from '../components/friendList';
 
 let customFonts  = {
     'Avenir': require('../assets/fonts/Avenir.ttf'),
     'Futura': require('../assets/fonts/Futura.ttf'),
   };
   
-export default class SendGift extends React.Component  {
+export default class FindFriends extends React.Component  {
     state = {
       fontsLoaded: false,
     };
@@ -29,12 +29,12 @@ export default class SendGift extends React.Component  {
         return  [
         {
           
-        name:"Porsche",
+        name:"Chandler Bing",
         
       },
       {
         
-        name:"Guitar",
+        name:"Joey Tribbiani",
         
       },
       ]
@@ -45,17 +45,17 @@ export default class SendGift extends React.Component  {
         if (this.state.fontsLoaded) {
         return (
         <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('#')}>Chandler's Wishlist</Text>
+        <Text style={styles.welcome} onPress={() => this.props.navigation.navigate('SendGift')}>Find my friends</Text>
         
         
-          <Text style={styles.welcome3}>Send Chandler a gift</Text>
+          <Text style={styles.welcome3}>Tap on their profile to check out their wishlist!</Text>
          
          
 
       <ScrollView style={styles.scrollcontainer}>
-      <WishList itemList={this.getData()}/>
-     
+      <FriendList itemList={this.getData()}/>
       
+     
       </ScrollView>
     </View>
         )}
@@ -76,6 +76,7 @@ export default class SendGift extends React.Component  {
             height:'100%',
             position:'relative',
             top:'40%',
+            
             
           },
         logo:{
